@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: master
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-TU_PASSWORD}  # Usa variable de entorno o default
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./scripts/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-TU_PASSWORD}@postgres:5432/master
+
+volumes:
+  postgres_data:

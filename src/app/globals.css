@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  @apply px-0 md:px-4;
+}
+
+.container {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+h1, h2, h3, h4 {
+  color: #1e3a5f;
+}
+
+a {
+  color: #1e3a5f;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #2d5a8a;
+}
+
+button,
+input,
+select,
+textarea {
+  border-radius: 0.6rem;
+}
+
+/* Custom Swiper pagination positioning */
+.swiper-pagination {
+  bottom: 120px !important;
+}
+
+@media (max-width: 640px) {
+  .swiper-pagination {
+    bottom: 100px !important;
+  }
+}
+
+/* Swiper bullets: blanco */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.7) !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff !important;
+  width: 0.75rem !important;
+  height: 0.75rem !important;
+}
