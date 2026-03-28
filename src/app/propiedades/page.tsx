@@ -75,20 +75,13 @@ function PropiedadesContent() {
       {viewMode === "map" ? (
         !loading && list.length > 0 ? (
           <div className="flex flex-1 min-h-0 overflow-hidden flex-col lg:flex-row">
-            <div className="w-full lg:w-1/2 relative min-h-[420px]">
-              <PropertiesMap
-                properties={list}
-                onMarkerClick={(propertyId) => setSelectedPropertyId(propertyId)}
-                selectedPropertyId={selectedPropertyId}
-              />
-            </div>
-            <div className="hidden lg:flex lg:w-1/2 flex-col bg-slate-950/90 border-l border-white/10">
+            <div className="hidden lg:flex lg:w-1/2 flex-col bg-slate-950/90 border-r border-white/10">
               <div className="px-4 sm:px-6 py-4 border-b border-white/10">
                 <h2 className="font-semibold text-white">Propiedades encontradas</h2>
                 <p className="text-xs text-slate-400 mt-1">Haz clic para ver en el mapa</p>
               </div>
               <div className="flex-1 overflow-y-auto">
-                <div className="space-y-2 p-3 sm:p-4">
+                <div className="space-y-3 p-4 sm:p-5">
                   {list.map((p) => (
                     <PropertyCard
                       key={p.id}
@@ -100,6 +93,13 @@ function PropiedadesContent() {
                   ))}
                 </div>
               </div>
+            </div>
+            <div className="w-full lg:w-1/2 relative min-h-[420px]">
+              <PropertiesMap
+                properties={list}
+                onMarkerClick={(propertyId) => setSelectedPropertyId(propertyId)}
+                selectedPropertyId={selectedPropertyId}
+              />
             </div>
           </div>
         ) : !loading && list.length === 0 ? (

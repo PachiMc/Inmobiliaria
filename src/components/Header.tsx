@@ -21,7 +21,7 @@ export default function Header() {
       <div className="container flex items-center justify-between py-2.5">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/Logo.jpg"
+            src="/Logo.png"
             alt="Inmobiliaria"
             width={150}
             height={40}

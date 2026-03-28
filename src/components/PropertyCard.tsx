@@ -61,25 +61,25 @@ export default function PropertyCard({
   if (compact) {
     return (
       <div 
-        className={`flex gap-3 p-2.5 rounded-lg border cursor-pointer transition ${
+        className={`flex gap-4 p-4 rounded-xl border cursor-pointer transition ${
           isSelected ? 'bg-white/10 border-primary shadow-md' : 'bg-slate-950 border-white/10 hover:border-white/20'
         }`}
         onClick={onSelect}
       >
-        <div className="relative w-20 h-20 flex-shrink-0 rounded-md overflow-hidden bg-gray-100">
+        <div className="relative h-28 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
           <Image
             src={img}
             alt={p.titulo || p.codigo}
             fill
             className="object-cover"
-            sizes="80px"
+            sizes="112px"
           />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-white">{formatPrecio(p.precio, p.moneda)}</p>
-          <h3 className="text-sm font-semibold text-white line-clamp-1">{p.titulo || p.codigo}</h3>
-          <p className="text-xs text-slate-400 line-clamp-1">{p.direccion}</p>
-          <ul className="mt-1 flex gap-2 text-xs text-slate-400">
+          <p className="text-base font-semibold text-white">{formatPrecio(p.precio, p.moneda)}</p>
+          <h3 className="text-lg font-semibold text-white line-clamp-1">{p.titulo || p.codigo}</h3>
+          <p className="mt-1 text-base text-slate-400 line-clamp-1">{p.direccion}</p>
+          <ul className="mt-2 flex gap-3.5 text-base text-slate-400">
             {p.metros_cuadrados != null && <li>📐 {p.metros_cuadrados}m²</li>}
             {p.dormitorios > 0 && <li>🛏️ {p.dormitorios}</li>}
             {p.banos > 0 && <li>🚿 {p.banos}</li>}
