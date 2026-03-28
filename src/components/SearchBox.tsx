@@ -38,17 +38,25 @@ export default function SearchBox() {
         <select 
           value={tipo} 
           onChange={(e) => setTipo(e.target.value)} 
-          className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition hover:border-gray-400"
+          className="w-full rounded-3xl border border-white/20 bg-white/10 px-3 py-3 text-sm text-white placeholder-slate-400 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 transition hover:border-white/30"
         >
-          {TIPOS.map((o) => <option key={o.value || "all"} value={o.value}>{o.label}</option>)}
+          {TIPOS.map((o) => (
+            <option key={o.value || "all"} value={o.value} className="bg-white text-black">
+              {o.label}
+            </option>
+          ))}
         </select>
         
         <select 
           value={operacion} 
           onChange={(e) => setOperacion(e.target.value)} 
-          className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition hover:border-gray-400"
+          className="w-full rounded-3xl border border-white/20 bg-white/10 px-3 py-3 text-sm text-white placeholder-slate-400 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 transition hover:border-white/30"
         >
-          {OPERACIONES.map((o) => <option key={o.value || "all"} value={o.value}>{o.label}</option>)}
+          {OPERACIONES.map((o) => (
+            <option key={o.value || "all"} value={o.value} className="bg-white text-black">
+              {o.label}
+            </option>
+          ))}
         </select>
         
         <input 
@@ -56,12 +64,12 @@ export default function SearchBox() {
           value={q} 
           onChange={(e) => setQ(e.target.value)} 
           placeholder="Código o dirección..." 
-          className="sm:col-span-2 lg:col-span-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition hover:border-gray-400" 
+          className="sm:col-span-2 lg:col-span-2 w-full rounded-3xl border border-white/20 bg-white/10 px-3 py-3 text-sm text-white placeholder:text-white placeholder:opacity-100 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 transition hover:border-white/30" 
         />
         
         <button 
           type="submit" 
-          className="w-full lg:col-span-1 rounded-lg bg-primary text-black px-4 py-2 text-sm font-medium hover:bg-primary/90 transition shadow-sm hover:shadow-md"
+          className="w-full lg:col-span-1 rounded-3xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white hover:bg-white/15 transition shadow-sm hover:shadow-md"
         >
           🔍 Buscar
         </button>

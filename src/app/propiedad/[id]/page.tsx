@@ -50,7 +50,7 @@ export default function PropiedadPage() {
   if (loading) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-12">
-        <div className="h-96 animate-pulse rounded-xl bg-gray-200" />
+        <div className="h-96 animate-pulse rounded-xl bg-slate-900" />
       </div>
     );
   }
@@ -58,7 +58,7 @@ export default function PropiedadPage() {
   if (!prop) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-12 text-center">
-        <p className="text-black">Propiedad no encontrada.</p>
+        <p className="text-white">Propiedad no encontrada.</p>
         <Link href="/propiedades" className="mt-4 inline-block text-primary hover:underline">
           Volver a propiedades
         </Link>
@@ -82,23 +82,34 @@ export default function PropiedadPage() {
           <span className="rounded bg-primary/10 px-2 py-0.5 text-sm font-medium text-primary">
             {prop.operacion === "alquiler" ? "Alquiler" : "Venta"}
           </span>
-          <h1 className="mt-2 text-2xl font-bold text-black sm:text-3xl">{prop.titulo || prop.codigo}</h1>
-          {prop.direccion && <p className="mt-1 text-black">{prop.direccion}</p>}
-          <p className="mt-4 text-lg font-semibold text-primary">
+          <h1 className="mt-2 text-2xl font-bold text-white sm:text-3xl">{prop.titulo || prop.codigo}</h1>
+          {prop.direccion && <p className="mt-1 text-slate-300">{prop.direccion}</p>}
+          <p className="mt-4 text-lg font-semibold text-white">
             {prop.operacion === "alquiler" ? "Precio de alquiler: " : "Precio: "}
             {formatPrecio(prop.precio, prop.moneda)}
           </p>
           {prop.descripcion && (
             <div className="mt-6">
-              <h2 className="text-lg font-semibold text-black">Descripción</h2>
-              <p className="mt-2 whitespace-pre-wrap text-black">{prop.descripcion}</p>
+              <h2 className="text-lg font-semibold text-white">Descripción</h2>
+              <p className="mt-2 whitespace-pre-wrap text-slate-300">{prop.descripcion}</p>
             </div>
           )}
+          <div className="mt-8 rounded-3xl border border-white/10 bg-slate-950/80 p-6">
+            <h2 className="text-lg font-semibold text-white">Ubicación</h2>
+            <div className="mt-4 overflow-hidden rounded-3xl border border-white/10 bg-black/70">
+              <iframe
+                title="Ubicación propiedad"
+                className="h-80 w-full border-0"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(prop.direccion || prop.titulo || ":")}&output=embed`}
+                loading="lazy"
+              />
+            </div>
+          </div>
         </div>
         <div>
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-            <h2 className="text-lg font-semibold text-black">Características</h2>
-            <ul className="mt-4 space-y-2 text-black">
+          <div className="rounded-3xl border border-white/10 bg-slate-950/90 p-6">
+            <h2 className="text-lg font-semibold text-white">Características</h2>
+            <ul className="mt-4 space-y-2 text-slate-300">
               <li><strong>Código:</strong> {prop.codigo}</li>
               <li><strong>Tipo:</strong> {prop.tipo}</li>
               {prop.dormitorios > 0 && <li><strong>Dormitorios:</strong> {prop.dormitorios}</li>}
@@ -109,7 +120,7 @@ export default function PropiedadPage() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 py-3 font-medium text-black hover:bg-green-700"
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-3 font-semibold text-white hover:bg-white/15"
             >
               Contactar por WhatsApp
             </a>

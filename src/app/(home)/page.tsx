@@ -14,17 +14,7 @@ export default function HomePage() {
       </section>
 
       <main className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6">
-        <section className="mb-14">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <h2 className="text-2xl font-bold text-white">Propiedades destacadas</h2>
-            <Link href="/propiedades" className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15">
-              Ver todas las propiedades
-            </Link>
-          </div>
-          <FeaturedPropertiesCarousel />
-        </section>
-
-        <section className="mt-16 mb-16 rounded-3xl border border-white/30 bg-white p-6 shadow-inner">
+        <section className="mb-14 rounded-3xl border border-white/30 bg-white p-6 shadow-inner">
           <h2 className="mb-4 text-2xl font-bold text-black">Por qué elegirnos</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <article className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm transition hover:shadow-lg">
@@ -40,6 +30,16 @@ export default function HomePage() {
               <p className="mt-2 text-slate-700">Te conectamos con opciones de crédito y seguro más convenientes.</p>
             </article>
           </div>
+        </section>
+
+        <section className="mb-14">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <h2 className="text-2xl font-bold text-white">Propiedades destacadas</h2>
+            <Link href="/propiedades" className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15">
+              Ver todas las propiedades
+            </Link>
+          </div>
+          <FeaturedPropertiesCarousel />
         </section>
 
         <section className="mb-14 rounded-3xl border border-white/10 bg-slate-950/80 p-6 shadow-sm">
@@ -80,4 +80,3 @@ export default function HomePage() {
     </>
   );
 }
-

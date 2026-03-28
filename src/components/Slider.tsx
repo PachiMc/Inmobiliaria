@@ -9,14 +9,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const SLIDES = [
-  { src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80", alt: "Casa moderna", title: "Encontrá tu próximo hogar" },
-  { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80", alt: "Interior", title: "Venta y alquiler de propiedades" },
-  { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80", alt: "Casa con jardín", title: "Asesoramiento profesional" },
+  { src: "/Slider-1.jpg", alt: "Slider principal 1", title: "Encontrá tu próximo hogar" },
+  { src: "/Slider-2.jpg", alt: "Slider principal 2", title: "Venta y alquiler de propiedades" },
+  { src: "/Slider-3.jpg", alt: "Slider principal 3", title: "Asesoramiento profesional" },
 ];
 
 export default function Slider() {
   return (
-    <section className="relative h-[420px] w-full overflow-hidden bg-gray-900 sm:h-[500px]">
+    <section className="relative w-screen h-[560px] overflow-hidden bg-gray-900 sm:h-[660px] lg:h-[760px]">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{

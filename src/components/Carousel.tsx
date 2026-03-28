@@ -43,7 +43,7 @@ export default function Carousel({ images, alt }: CarouselProps) {
           <button
             type="button"
             onClick={scrollPrev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-black hover:bg-black/70"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/70"
             aria-label="Anterior"
           >
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@ export default function Carousel({ images, alt }: CarouselProps) {
           <button
             type="button"
             onClick={scrollNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-black hover:bg-black/70"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/70"
             aria-label="Siguiente"
           >
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

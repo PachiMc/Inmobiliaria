@@ -3,11 +3,38 @@
 import { useEffect, useMemo, useState } from "react";
 import PropertyCard, { PropertyCardData } from "@/components/PropertyCard";
 
-const AUTO_ADVANCE_MS = 6000;
+const MAX_ITEMS = 5;
+
+function GroupCarousel({ title, items }: { title: string; items: PropertyCardData[] }) {
+  if (!items.length) {
+    return (
+      <div className="rounded-3xl border border-white/10 bg-slate-950/90 p-6 text-center text-slate-400">
+        No hay propiedades destacadas para {title.toLowerCase()}.
+      </div>
+    );
+  }
+
+  return (
+    <section className="rounded-3xl border border-white/10 bg-slate-950/90 p-4">
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 className="text-xl font-bold text-white">{title}</h3>
+          <p className="text-sm text-slate-400">Las mejores opciones del momento.</p>
+        </div>
+      </div>
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-2 pb-2">
+        {items.map((property) => (
+          <div key={property.id} className="min-w-[280px] snap-start sm:min-w-[320px]">
+            <PropertyCard p={property} variant="light" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default function FeaturedPropertiesCarousel() {
   const [properties, setProperties] = useState<PropertyCardData[]>([]);
-  const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,28 +52,21 @@ export default function FeaturedPropertiesCarousel() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    if (properties.length <= 1) return;
-    const timer = setInterval(() => {
-      setIndex((current) => (current + 1) % properties.length);
-    }, AUTO_ADVANCE_MS);
-    return () => clearInterval(timer);
-  }, [properties.length]);
+  const ventas = useMemo(
+    () => properties.filter((property) => property.operacion === "venta").slice(0, MAX_ITEMS),
+    [properties]
+  );
 
-  const slides = useMemo(() => {
-    const chunkSize = 6;
-    const chunks = [] as PropertyCardData[][];
-    for (let i = 0; i < properties.length; i += chunkSize) {
-      chunks.push(properties.slice(i, i + chunkSize));
-    }
-    return chunks;
-  }, [properties]);
+  const alquileres = useMemo(
+    () => properties.filter((property) => property.operacion === "alquiler").slice(0, MAX_ITEMS),
+    [properties]
+  );
 
   if (loading) {
     return (
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="h-80 animate-pulse rounded-xl bg-gray-200" />
+      <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
+        {[1, 2].map((index) => (
+          <div key={index} className="h-80 animate-pulse rounded-3xl bg-slate-900/80" />
         ))}
       </div>
     );
@@ -54,59 +74,16 @@ export default function FeaturedPropertiesCarousel() {
 
   if (!properties.length) {
     return (
-      <p className="rounded-xl bg-gray-100 p-8 text-center text-gray-600">
-        No hay propiedades destacadas todavía. Agregá algunas desde el panel de admin.
-      </p>
+      <div className="rounded-3xl border border-white/10 bg-slate-950/90 p-8 text-center text-slate-300">
+        No hay propiedades destacadas todavía. Agregá algunas desde el panel de administrador.
+      </div>
     );
   }
 
   return (
-    <div>
-      <div className="relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-        <div
-          className="flex transition-transform duration-700"
-          style={{ width: `${slides.length * 100}%`, transform: `translateX(-${index * 100}%)` }}
-        >
-          {slides.map((group, slideIndex) => (
-            <div key={slideIndex} className="min-w-full p-4">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {group.map((property) => (
-                  <PropertyCard key={property.id} p={property} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          aria-label="Slide anterior"
-          onClick={() => setIndex((i) => (i === 0 ? slides.length - 1 : i - 1))}
-          className="absolute left-2 top-1/2 z-20 h-9 w-9 -translate-y-1/2 rounded-full bg-white/80 text-black shadow hover:bg-white"
-        >
-          ‹
-        </button>
-        <button
-          type="button"
-          aria-label="Próximo slide"
-          onClick={() => setIndex((i) => (i + 1) % slides.length)}
-          className="absolute right-2 top-1/2 z-20 h-9 w-9 -translate-y-1/2 rounded-full bg-white/80 text-black shadow hover:bg-white"
-        >
-          ›
-        </button>
-      </div>
-
-      <div className="mt-4 flex justify-center gap-2">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            aria-label={`Ir al slide ${i + 1}`}
-            onClick={() => setIndex(i)}
-            className={`h-2 rounded-full transition-all ${i === index ? "w-8 bg-primary" : "w-2 bg-gray-300"}`}
-          />
-        ))}
-      </div>
+    <div className="space-y-6">
+      <GroupCarousel title="Ventas destacadas" items={ventas} />
+      <GroupCarousel title="Alquileres destacadas" items={alquileres} />
     </div>
   );
 }

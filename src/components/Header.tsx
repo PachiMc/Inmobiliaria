@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -16,18 +17,24 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl shadow-sm border-b border-gray-200">
-      <div className="container flex items-center justify-between py-3">
-        <Link href="/" className="text-xl font-black tracking-tight text-primary">
-          Inmobiliaria
+    <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl shadow-sm border-b border-white/10">
+      <div className="container flex items-center justify-between py-4">
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/Logo.jpg"
+            alt="Inmobiliaria"
+            width={150}
+            height={40}
+            className="h-auto w-auto object-contain"
+          />
         </Link>
         <nav className="hidden md:flex md:items-center md:gap-6">
           {nav.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`font-medium transition hover:text-primary ${
-                pathname === href ? "text-primary" : "text-black"
+              className={`text-base font-semibold transition ${
+                pathname === href ? "text-white" : "text-white/80 hover:text-white"
               }`}
             >
               {label}
@@ -35,14 +42,14 @@ export default function Header() {
           ))}
           <Link
             href="/admin"
-            className="rounded border border-primary bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/20"
+            className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15"
           >
             Admin
           </Link>
         </nav>
         <button
           type="button"
-          className="rounded p-2 md:hidden"
+          className="rounded p-2 text-white md:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Menú"
         >
@@ -56,12 +63,14 @@ export default function Header() {
         </button>
       </div>
       {open && (
-        <div className="border-t bg-white px-4 py-3 md:hidden">
+        <div className="border-t border-white/10 bg-black/95 px-4 py-3 md:hidden">
           {nav.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className="block py-2 font-medium text-black hover:text-primary"
+              className={`block py-2 font-medium transition ${
+                pathname === href ? "text-white" : "text-white/80 hover:text-white"
+              }`}
               onClick={() => setOpen(false)}
             >
               {label}
@@ -69,7 +78,7 @@ export default function Header() {
           ))}
           <Link
             href="/admin"
-            className="inline-flex items-center justify-center rounded border border-primary bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/20"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/15"
             onClick={() => setOpen(false)}
           >
             Admin

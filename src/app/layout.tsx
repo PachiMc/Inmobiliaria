@@ -16,8 +16,10 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <Header />
-        <main className="min-h-screen bg-slate-50 text-slate-900">
-          <div className="container pt-4">{children}</div>
+        <main className="min-h-screen bg-black text-white">
+          <div className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6">
+            {children}
+          </div>
         </main>
         <Footer />
         <WhatsAppButton />
