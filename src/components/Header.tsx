@@ -18,7 +18,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl shadow-sm border-b border-white/10">
-      <div className="container flex items-center justify-between py-4">
+      <div className="container flex items-center justify-between py-2.5">
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/Logo.jpg"
@@ -33,7 +33,7 @@ export default function Header() {
             <Link
               key={href}
               href={href}
-              className={`text-base font-semibold transition ${
+              className={`text-lg font-semibold transition ${
                 pathname === href ? "text-white" : "text-white/80 hover:text-white"
               }`}
             >
@@ -42,7 +42,7 @@ export default function Header() {
           ))}
           <Link
             href="/admin"
-            className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/15"
+            className="rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-base font-semibold text-white hover:bg-white/15"
           >
             Admin
           </Link>
@@ -68,7 +68,7 @@ export default function Header() {
             <Link
               key={href}
               href={href}
-              className={`block py-2 font-medium transition ${
+              className={`block py-2.5 text-base font-semibold transition ${
                 pathname === href ? "text-white" : "text-white/80 hover:text-white"
               }`}
               onClick={() => setOpen(false)}
@@ -78,7 +78,7 @@ export default function Header() {
           ))}
           <Link
             href="/admin"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/15"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-base font-medium text-white hover:bg-white/15"
             onClick={() => setOpen(false)}
           >
             Admin
