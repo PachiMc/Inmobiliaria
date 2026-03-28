@@ -61,29 +61,38 @@ export default function PropertyCard({
   if (compact) {
     return (
       <div 
-        className={`flex gap-4 p-4 rounded-xl border cursor-pointer transition ${
-          isSelected ? 'bg-white/10 border-primary shadow-md' : 'bg-slate-950 border-white/10 hover:border-white/20'
+        className={`flex gap-3 p-3 rounded-2xl border cursor-pointer transition ${
+          isSelected ? 'bg-white/10 border-primary shadow-md ring-1 ring-white/10' : 'bg-slate-950 border-white/10 hover:border-white/20'
         }`}
         onClick={onSelect}
       >
-        <div className="relative h-28 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+        <div className="relative h-24 w-24 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100">
           <Image
             src={img}
             alt={p.titulo || p.codigo}
             fill
             className="object-cover"
-            sizes="112px"
+            sizes="96px"
           />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-base font-semibold text-white">{formatPrecio(p.precio, p.moneda)}</p>
-          <h3 className="text-lg font-semibold text-white line-clamp-1">{p.titulo || p.codigo}</h3>
-          <p className="mt-1 text-base text-slate-400 line-clamp-1">{p.direccion}</p>
-          <ul className="mt-2 flex gap-3.5 text-base text-slate-400">
+          <p className="text-sm font-semibold text-white">{formatPrecio(p.precio, p.moneda)}</p>
+          <h3 className="mt-0.5 text-base font-semibold text-white line-clamp-1">{p.titulo || p.codigo}</h3>
+          <p className="mt-1 text-sm text-slate-400 line-clamp-1">{p.direccion}</p>
+          <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm text-slate-400">
             {p.metros_cuadrados != null && <li>📐 {p.metros_cuadrados}m²</li>}
             {p.dormitorios > 0 && <li>🛏️ {p.dormitorios}</li>}
             {p.banos > 0 && <li>🚿 {p.banos}</li>}
           </ul>
+          <div className="mt-3 flex">
+            <Link
+              href={detailsHref}
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center justify-center rounded-full border border-white/20 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/10"
+            >
+              Detalles
+            </Link>
+          </div>
         </div>
       </div>
     );

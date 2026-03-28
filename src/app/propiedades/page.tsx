@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchBox from "@/components/SearchBox";
 import PropertyCard from "@/components/PropertyCard";
@@ -13,6 +13,7 @@ function PropiedadesContent() {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"list" | "map">("map");
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
+  const propertyItemRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   useEffect(() => {
     const tipo = searchParams.get("tipo") || "";
@@ -31,6 +32,19 @@ function PropiedadesContent() {
       .catch(() => setList([]))
       .finally(() => setLoading(false));
   }, [searchParams]);
+
+  useEffect(() => {
+    if (viewMode !== "map" || selectedPropertyId == null) return;
+
+    const selectedItem = propertyItemRefs.current[selectedPropertyId];
+    if (!selectedItem) return;
+
+    selectedItem.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "nearest",
+    });
+  }, [selectedPropertyId, viewMode]);
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-9rem)] bg-black rounded-3xl border border-white/10 shadow-sm">
@@ -74,32 +88,49 @@ function PropiedadesContent() {
       {/* Main Content */}
       {viewMode === "map" ? (
         !loading && list.length > 0 ? (
-          <div className="flex flex-1 min-h-0 overflow-hidden flex-col lg:flex-row">
-            <div className="hidden lg:flex lg:w-1/2 flex-col bg-slate-950/90 border-r border-white/10">
-              <div className="px-4 sm:px-6 py-4 border-b border-white/10">
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden lg:h-[calc(100vh-9.5rem)] lg:flex-row lg:gap-0">
+            <div className="relative flex h-[620px] min-h-0 w-full flex-col gap-3 bg-slate-950/70 p-3 lg:h-full lg:w-[45%] lg:p-4">
+              <div className="flex h-[76px] shrink-0 flex-col justify-center rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
                 <h2 className="font-semibold text-white">Propiedades encontradas</h2>
-                <p className="text-xs text-slate-400 mt-1">Haz clic para ver en el mapa</p>
+                <p className="mt-1 text-xs text-slate-400">Haz clic para ver en el mapa</p>
               </div>
-              <div className="flex-1 overflow-y-auto">
-                <div className="space-y-3 p-4 sm:p-5">
-                  {list.map((p) => (
-                    <PropertyCard
-                      key={p.id}
-                      p={p}
-                      isSelected={selectedPropertyId === p.id}
-                      onSelect={() => setSelectedPropertyId(p.id)}
-                      compact={true}
-                    />
-                  ))}
+              <div className="properties-map-results-body min-h-0 overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_24px_70px_rgba(0,0,0,0.25)]">
+                <div className="property-results-scroll h-full overflow-y-auto overscroll-contain">
+                  <div className="space-y-3 p-4 sm:p-5">
+                    {list.map((p) => (
+                      <div
+                        key={p.id}
+                        ref={(element) => {
+                          propertyItemRefs.current[p.id] = element;
+                        }}
+                      >
+                        <PropertyCard
+                          p={p}
+                          isSelected={selectedPropertyId === p.id}
+                          onSelect={() => setSelectedPropertyId(p.id)}
+                          compact={true}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="w-full lg:w-1/2 relative min-h-[420px]">
-              <PropertiesMap
-                properties={list}
-                onMarkerClick={(propertyId) => setSelectedPropertyId(propertyId)}
-                selectedPropertyId={selectedPropertyId}
-              />
+            <div className="relative flex h-[620px] min-h-0 w-full flex-col gap-3 bg-slate-950/70 p-3 lg:h-full lg:w-[55%] lg:p-4">
+              <div className="flex h-[76px] shrink-0 items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
+                <div>
+                  <h2 className="font-semibold text-white">Mapa de propiedades</h2>
+                  <p className="text-xs text-slate-400 mt-1">Vista más amplia para comparar resultados y ubicación</p>
+                </div>
+                <p className="text-xs text-slate-500">{list.length} resultado{list.length !== 1 ? "s" : ""}</p>
+              </div>
+              <div className="properties-map-results-body min-h-0 overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+                <PropertiesMap
+                  properties={list}
+                  onMarkerClick={(propertyId) => setSelectedPropertyId(propertyId)}
+                  selectedPropertyId={selectedPropertyId}
+                />
+              </div>
             </div>
           </div>
         ) : !loading && list.length === 0 ? (

@@ -25,6 +25,7 @@ export default function Header() {
             alt="Inmobiliaria"
             width={150}
             height={40}
+            loading="eager"
             className="h-auto w-auto object-contain"
           />
         </Link>
@@ -40,6 +41,7 @@ export default function Header() {
               {label}
             </Link>
           ))}
+          
           <Link
             href="/admin"
             className="rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-base font-semibold text-white hover:bg-white/15"
