@@ -5,8 +5,9 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Inmobiliaria | Venta y Alquiler de Propiedades",
-  description: "Encontrá tu próximo hogar. Propiedades en venta y alquiler.",
+  title: "Inmobiliaria Jade | Chaya Gorelik · Negocios Inmobiliarios",
+  description:
+    "Venta y alquiler, tasaciones profesionales, subastas y remates con respaldo del Colegio de Martilleros, y asesoría jurídica integral con revisión documental.",
 };
 
 export default function RootLayout({

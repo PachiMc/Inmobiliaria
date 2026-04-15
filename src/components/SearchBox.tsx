@@ -17,6 +17,9 @@ const OPERACIONES = [
   { value: "alquiler", label: "Alquiler" },
 ];
 
+const fieldClass =
+  "w-full rounded-2xl border border-zinc-600 bg-zinc-950 px-3 py-3 text-sm text-white placeholder:text-slate-500 focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/15 transition hover:border-zinc-500";
+
 export default function SearchBox() {
   const router = useRouter();
   const [tipo, setTipo] = useState("");
@@ -34,44 +37,36 @@ export default function SearchBox() {
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-5 items-end">
-        <select 
-          value={tipo} 
-          onChange={(e) => setTipo(e.target.value)} 
-          className="w-full rounded-3xl border border-white/20 bg-white/10 px-3 py-3 text-sm text-white placeholder-slate-400 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 transition hover:border-white/30"
-        >
+      <div className="grid items-end gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
+        <select value={tipo} onChange={(e) => setTipo(e.target.value)} className={fieldClass}>
           {TIPOS.map((o) => (
-            <option key={o.value || "all"} value={o.value} className="bg-white text-black">
+            <option key={o.value || "all"} value={o.value} className="bg-zinc-950 text-white">
               {o.label}
             </option>
           ))}
         </select>
-        
-        <select 
-          value={operacion} 
-          onChange={(e) => setOperacion(e.target.value)} 
-          className="w-full rounded-3xl border border-white/20 bg-white/10 px-3 py-3 text-sm text-white placeholder-slate-400 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 transition hover:border-white/30"
-        >
+
+        <select value={operacion} onChange={(e) => setOperacion(e.target.value)} className={fieldClass}>
           {OPERACIONES.map((o) => (
-            <option key={o.value || "all"} value={o.value} className="bg-white text-black">
+            <option key={o.value || "all"} value={o.value} className="bg-zinc-950 text-white">
               {o.label}
             </option>
           ))}
         </select>
-        
-        <input 
-          type="text" 
-          value={q} 
-          onChange={(e) => setQ(e.target.value)} 
-          placeholder="Código o dirección..." 
-          className="sm:col-span-2 lg:col-span-2 w-full rounded-3xl border border-white/20 bg-white/10 px-3 py-3 text-sm text-white placeholder:text-white placeholder:opacity-100 focus:border-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 transition hover:border-white/30" 
+
+        <input
+          type="text"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Código o dirección..."
+          className={`sm:col-span-2 lg:col-span-2 ${fieldClass}`}
         />
-        
-        <button 
-          type="submit" 
-          className="w-full lg:col-span-1 rounded-3xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white hover:bg-white/15 transition shadow-sm hover:shadow-md"
+
+        <button
+          type="submit"
+          className="w-full rounded-2xl border border-white/20 bg-white px-4 py-3 text-sm font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 lg:col-span-1"
         >
-          🔍 Buscar
+          Buscar
         </button>
       </div>
     </form>

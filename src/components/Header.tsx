@@ -17,12 +17,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-xl shadow-sm border-b border-white/10">
-      <div className="container flex items-center justify-between py-2.5">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black shadow-sm">
+      <div className="container flex items-center justify-between py-2.5 md:py-3">
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/Logo.png"
-            alt="Inmobiliaria"
+            alt="Chaya Gorelik · Negocios Inmobiliarios"
             width={150}
             height={40}
             loading="eager"
@@ -65,7 +65,7 @@ export default function Header() {
         </button>
       </div>
       {open && (
-        <div className="border-t border-white/10 bg-black/95 px-4 py-3 md:hidden">
+        <div className="border-t border-white/10 bg-black px-4 py-3 md:hidden">
           {nav.map(({ href, label }) => (
             <Link
               key={href}

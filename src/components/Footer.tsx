@@ -7,43 +7,56 @@ export default function Footer() {
     <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-8 md:grid-cols-4">
-          {/* Logo y Descripción */}
           <div className="md:col-span-1">
-            <h3 className="mb-4 text-xl font-bold !text-white">Inmobiliaria</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Tu socio confiable en el mundo inmobiliario. Encontramos el hogar perfecto para ti con profesionalismo y dedicación.
+            <h3 className="mb-4 text-xl font-bold !text-white">Chaya Gorelik</h3>
+            <p className="text-sm leading-relaxed text-gray-300">
+              Negocios inmobiliarios con respaldo profesional: tasaciones, subastas y remates con matrícula habilitante, y asesoría jurídica
+              integral con revisión detallada de documentación.
             </p>
           </div>
 
-          {/* Enlaces Rápidos */}
           <div>
-            <h4 className="mb-4 text-lg font-bold !text-white">Enlaces Rápidos</h4>
+            <h4 className="mb-4 text-lg font-bold !text-white">Enlaces rápidos</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/" className="!text-white font-semibold hover:!text-gray-300 transition-colors">Inicio</Link></li>
-              <li><Link href="/propiedades" className="!text-white font-semibold hover:!text-gray-300 transition-colors">Propiedades</Link></li>
-              <li><Link href="/nosotros" className="!text-white font-semibold hover:!text-gray-300 transition-colors">Nosotros</Link></li>
-              <li><Link href="/contacto" className="!text-white font-semibold hover:!text-gray-300 transition-colors">Contacto</Link></li>
+              <li>
+                <Link href="/" className="!text-white font-semibold transition-colors hover:!text-gray-300">
+                  Inicio
+                </Link>
+              </li>
+              <li>
+                <Link href="/propiedades" className="!text-white font-semibold transition-colors hover:!text-gray-300">
+                  Propiedades
+                </Link>
+              </li>
+              <li>
+                <Link href="/nosotros" className="!text-white font-semibold transition-colors hover:!text-gray-300">
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link href="/contacto" className="!text-white font-semibold transition-colors hover:!text-gray-300">
+                  Contacto
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Servicios */}
           <div>
             <h4 className="mb-4 text-lg font-bold !text-white">Servicios</h4>
-            <ul className="space-y-2 text-sm text-white font-medium">
-              <li>Venta de Propiedades</li>
-              <li>Alquiler de Inmuebles</li>
-              <li>Asesoramiento Inmobiliario</li>
-              <li>Gestión de Propiedades</li>
+            <ul className="space-y-2 text-sm font-medium text-white">
+              <li>Venta y alquiler de propiedades</li>
+              <li>Tasaciones profesionales</li>
+              <li>Subastas y remates (Colegio de Martilleros)</li>
+              <li>Asesoría jurídica integral y revisión documental</li>
             </ul>
           </div>
 
-          {/* Contacto */}
           <div>
             <h4 className="mb-4 text-lg font-bold !text-white">Contacto</h4>
-            <div className="space-y-2 text-sm text-white font-medium">
+            <div className="space-y-2 text-sm font-medium text-white">
               <p>
                 <span className="block font-semibold">Email:</span>
-                <a href="mailto:contacto@inmobiliaria.com" className="!text-white hover:!text-gray-300 transition-colors">
+                <a href="mailto:contacto@inmobiliaria.com" className="!text-white transition-colors hover:!text-gray-300">
                   contacto@inmobiliaria.com
                 </a>
               </p>
@@ -59,10 +72,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="mt-8 border-t border-gray-700 pt-6 text-center">
           <p className="text-sm text-gray-400">
-            © {currentYear} Inmobiliaria. Todos los derechos reservados. | Diseñado con ❤️ para encontrar tu hogar ideal.
+            © {currentYear} Chaya Gorelik · Negocios Inmobiliarios. Todos los derechos reservados.
           </p>
         </div>
       </div>
