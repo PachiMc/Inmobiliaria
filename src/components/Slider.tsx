@@ -37,27 +37,16 @@ const SOCIAL_LINKS = [
       </svg>
     ),
   },
-  {
-    href: "mailto:contacto@inmobiliaria.com",
-    label: "Mail",
-    user: "contacto@inmobiliaria.com",
-    accent: "hover:border-amber-500/70 hover:bg-amber-500 hover:text-slate-950",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor">
-        <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.28L12 12.4l8-5.12V7H4Zm16 10V9.34l-7.46 4.77a1 1 0 0 1-1.08 0L4 9.34V17h16Z" />
-      </svg>
-    ),
-  },
 ];
 
 export default function Slider() {
   return (
-    <section className="relative w-screen h-[600px] overflow-hidden bg-gray-900 sm:h-[700px] lg:h-[800px]">
+    <section className="relative h-full min-h-0 w-screen overflow-hidden bg-gray-900">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{
           delay: 5000,
-          disableOnInteraction: false,
+          disableOnInteraction: true,
         }}
         pagination={{
           clickable: true,

@@ -1,27 +1,103 @@
 "use client";
 
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PropertyCard, { PropertyCardData } from "@/components/PropertyCard";
 
 const MAX_ITEMS = 5;
+const AUTOPLAY_MS = 4500;
 
 function GroupCarousel({ title, items }: { title: string; items: PropertyCardData[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: items.length > 1, align: "start" });
+  const carouselDragRef = useRef(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) {
+      return;
+    }
+
+    const dragState = { pointerDown: false, startProgress: 0 };
+
+    const onPointerDown = () => {
+      dragState.pointerDown = true;
+      dragState.startProgress = emblaApi.scrollProgress();
+      carouselDragRef.current = false;
+    };
+
+    const onScroll = () => {
+      if (!dragState.pointerDown) return;
+      if (Math.abs(emblaApi.scrollProgress() - dragState.startProgress) > 0.02) {
+        carouselDragRef.current = true;
+      }
+    };
+
+    const onPointerUp = () => {
+      dragState.pointerDown = false;
+      window.setTimeout(() => {
+        carouselDragRef.current = false;
+      }, 0);
+    };
+
+    emblaApi.on("pointerDown", onPointerDown);
+    emblaApi.on("scroll", onScroll);
+    emblaApi.on("pointerUp", onPointerUp);
+
+    return () => {
+      emblaApi.off("pointerDown", onPointerDown);
+      emblaApi.off("scroll", onScroll);
+      emblaApi.off("pointerUp", onPointerUp);
+    };
+  }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi || items.length < 2) {
       return;
     }
 
-    const interval = window.setInterval(() => {
-      emblaApi.scrollNext();
-    }, 4500);
+    let intervalId: number | undefined;
+    let resumeId: number | undefined;
 
-    return () => window.clearInterval(interval);
+    const clearAutoplay = () => {
+      if (intervalId !== undefined) {
+        window.clearInterval(intervalId);
+        intervalId = undefined;
+      }
+    };
+
+    const startAutoplay = () => {
+      clearAutoplay();
+      intervalId = window.setInterval(() => {
+        emblaApi.scrollNext();
+      }, AUTOPLAY_MS);
+    };
+
+    const pauseAndScheduleResume = () => {
+      clearAutoplay();
+      if (resumeId !== undefined) {
+        window.clearTimeout(resumeId);
+      }
+      resumeId = window.setTimeout(() => {
+        resumeId = undefined;
+        startAutoplay();
+      }, AUTOPLAY_MS);
+    };
+
+    startAutoplay();
+
+    emblaApi.on("pointerDown", pauseAndScheduleResume);
+    emblaApi.on("pointerUp", pauseAndScheduleResume);
+
+    return () => {
+      clearAutoplay();
+      if (resumeId !== undefined) {
+        window.clearTimeout(resumeId);
+      }
+      emblaApi.off("pointerDown", pauseAndScheduleResume);
+      emblaApi.off("pointerUp", pauseAndScheduleResume);
+    };
   }, [emblaApi, items.length]);
 
   if (!items.length) {
@@ -41,10 +117,22 @@ function GroupCarousel({ title, items }: { title: string; items: PropertyCardDat
         </div>
       </div>
       <div className="relative">
-        <div className="overflow-hidden px-2 pb-2" ref={emblaRef}>
+        <div
+          className="cursor-grab touch-pan-x select-none overflow-hidden px-2 pb-2 active:cursor-grabbing"
+          ref={emblaRef}
+        >
           <div className="flex">
             {items.map((property) => (
-              <div key={property.id} className="min-w-0 flex-[0_0_88%] pr-4 sm:flex-[0_0_58%] lg:flex-[0_0_42%]">
+              <div
+                key={property.id}
+                className="min-w-0 flex-[0_0_88%] pr-4 sm:flex-[0_0_58%] lg:flex-[0_0_42%]"
+                onClickCapture={(e) => {
+                  if (carouselDragRef.current) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                }}
+              >
                 <PropertyCard p={property} variant="light" />
               </div>
             ))}

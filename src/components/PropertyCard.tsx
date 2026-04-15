@@ -71,6 +71,7 @@ export default function PropertyCard({
             src={img}
             alt={p.titulo || p.codigo}
             fill
+            draggable={false}
             className="object-cover"
             sizes="96px"
           />
@@ -125,7 +126,8 @@ export default function PropertyCard({
           src={img}
           alt={p.titulo || p.codigo}
           fill
-          className="object-cover"
+          draggable={false}
+          className="object-cover pointer-events-none"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         {p.destacado && (

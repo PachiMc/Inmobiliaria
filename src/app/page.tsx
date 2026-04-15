@@ -6,13 +6,15 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <>
-      <div className="relative left-1/2 right-1/2 -mt-4 w-screen -translate-x-1/2">
-        <div className="border-b border-white/10 bg-zinc-950 px-4 py-5 sm:px-6">
+      <div className="relative left-1/2 right-1/2 -mt-4 flex h-[calc(100dvh-4.5rem)] max-h-[calc(100dvh-4.5rem)] w-screen -translate-x-1/2 flex-col overflow-hidden">
+        <div className="shrink-0 border-b border-white/10 bg-zinc-950 px-4 py-4 sm:px-6 sm:py-5">
           <div className="mx-auto max-w-7xl">
             <SearchHero />
           </div>
         </div>
-        <Slider />
+        <div className="min-h-0 flex-1">
+          <Slider />
+        </div>
       </div>
 
       <div className="mx-auto w-full max-w-7xl pt-10 sm:pt-12">
