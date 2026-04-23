@@ -6,18 +6,45 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <>
-      <div className="relative left-1/2 right-1/2 -mt-4 flex h-[calc(100dvh-4.5rem)] max-h-[calc(100dvh-4.5rem)] w-screen -translate-x-1/2 flex-col overflow-hidden">
-        <div className="shrink-0 border-b border-white/10 bg-zinc-950 px-4 py-4 sm:px-6 sm:py-5">
-          <div className="mx-auto max-w-7xl">
-            <SearchHero />
-          </div>
-        </div>
-        <div className="min-h-0 flex-1">
+      <div className="relative left-1/2 right-1/2 -mt-4 flex h-[50vh] max-h-[60vh] w-screen max-w-none -translate-x-1/2 flex-col overflow-hidden">
+        <div className="min-h-0 flex-1 w-full">
           <Slider />
         </div>
       </div>
 
       <div className="mx-auto w-full max-w-7xl pt-10 sm:pt-12">
+        <div className="mb-6">
+          <SearchHero />
+        </div>
+
+        <section className="mb-14 text-center">
+          <h2 className="mb-6 text-2xl font-bold text-white">Seguinos en redes sociales</h2>
+          <div className="flex justify-center gap-6">
+            <Link
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/20 bg-white/10 p-3 text-white transition hover:bg-white/15"
+              aria-label="Facebook"
+            >
+              <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </Link>
+            <Link
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/20 bg-white/10 p-3 text-white transition hover:bg-white/15"
+              aria-label="Instagram"
+            >
+              <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm8.5 2.25a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5ZM12 7.75a4.25 4.25 0 1 1 0 8.5 4.25 4.25 0 0 1 0-8.5Zm0 1.5a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5Z"/>
+              </svg>
+            </Link>
+          </div>
+        </section>
+
         <section className="mb-14">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <h2 className="text-2xl font-bold text-white">Propiedades destacadas</h2>

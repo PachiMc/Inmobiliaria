@@ -18,11 +18,8 @@ export default function SearchHero() {
     >
       <div className="mb-4 text-center sm:text-left">
         <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-          Encontrá tu próximo hogar con confianza
+          Encontrá tu próximo hogar
         </h1>
-        <p className="mt-1.5 text-sm text-slate-400 sm:text-base">
-          Búsqueda por tipo, operación y ubicación. Resultados claros, sin tapar el recorrido visual.
-        </p>
       </div>
       <div className="rounded-2xl border border-white/15 bg-zinc-900 p-4 shadow-lg sm:p-5">
         <SearchBox />

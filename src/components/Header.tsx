@@ -23,8 +23,8 @@ export default function Header() {
           <Image
             src="/Logo.png"
             alt="Chaya Gorelik · Negocios Inmobiliarios"
-            width={150}
-            height={40}
+            width={120}
+            height={34}
             loading="eager"
             className="h-auto w-auto object-contain"
           />
